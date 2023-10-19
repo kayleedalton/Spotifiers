@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,14 +11,22 @@
 
     <script>
         async function fetchArtistData() {
+            const artistName = document.getElementById('artistSearch').value;
+            const apiUrl = `http://127.0.0.1:8000/?artist_name=${encodeURIComponent(artistName)}`;
+
             try {
-                let response = await fetch('http://127.0.0.1:8000/');
+                let response = await fetch(apiUrl);
                 let data = await response.json();
 
                 document.getElementById('artistData').innerText = JSON.stringify(data.message, null, 2);
             } catch (error) {
                 console.error("There was an issue fetching the artist data. DM me to start the api again it's probably just offline. -K", error);
             }
+        }
+
+        function handleSearch(event) {
+            event.preventDefault();  // prevent the form from submitting
+            fetchArtistData();
         }
     </script>
   </head>
@@ -29,18 +35,16 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Team 2's Project: Spotifiers</a>
 
-      <form class="form-inline my-2 my-lg-0 ml-auto">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="form-inline my-2 my-lg-0 ml-auto" onsubmit="handleSearch(event)">
+        <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </nav>
 
     <div class="container mt-5">
-      <button class="btn btn-primary" onclick="fetchArtistData()">Get Artist Data</button>
       <pre id="artistData"></pre> <!-- This is where the artist stuff will be displayed -K -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
-
 </html>
