@@ -7,8 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team 2's Project</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000;
+            color: #ddd;
+        }
 
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
     <script>
+        let isDarkMode = true; // I have dark mode as default
+
+        function toggleDarkMode() {
+            const body = document.body;
+            isDarkMode = !isDarkMode;
+            body.classList.toggle('light-mode', !isDarkMode);
+        }
+
         function clearHistory() {
             const historyDiv = document.getElementById('searchHistory');
             historyDiv.innerHTML = '';
@@ -16,7 +35,7 @@
 
         async function fetchArtistData() {
             const artistName = document.getElementById('artistSearch').value;
-            const apiUrl = `http://127.0.0.1:8000/?artist_name=${encodeURIComponent(artistName)}`;
+            const apiUrl = `http:127.0.0.1:8000/?artist_name=${encodeURIComponent(artistName)}`;
 
             try {
                 let response = await fetch(apiUrl);
@@ -24,19 +43,19 @@
                 const artist = data.message;
 
                 document.getElementById('artistName').innerText = artist.name;
-                document.getElementById('artistFollowers').innerText = `Followers: ${artist.followers.total}`;
-                document.getElementById('artistGenres').innerText = `Genres: ${artist.genres.join(", ")}`;
-                document.getElementById('artistPopularity').innerText = `Popularity: ${artist.popularity}`;
+                document.getElementById('artistFollowersTableCell').innerText = artist.followers.total;
+                document.getElementById('artistGenresTableCell').innerText = artist.genres.join(", ");
+                document.getElementById('artistPopularityTableCell').innerText = artist.popularity;
                 document.getElementById('artistSpotifyLink').href = artist.external_urls.spotify;
                 document.getElementById('artistImage').src = artist.images[0].url;
 
                 addToHistory(artist);
 
-                // Fetch the top 3 tracks for the artist
+                // Fetch the top 3 tracks
                 fetchTopTracks(artistName);
 
             } catch (error) {
-                console.error("There was an issue fetching the artist data. DM me to start the api again it's probably just offline. -K", error);
+                console.error("There was an issue fetching the artist data. DM me to start the API again; it's probably just offline. -K", error);
             }
         }
 
@@ -49,7 +68,7 @@
                 const topTracks = data.top_tracks;
 
                 const tracksDiv = document.getElementById('topTracks');
-                tracksDiv.innerHTML = ''; 
+                tracksDiv.innerHTML = '';
 
                 topTracks.forEach(track => {
                     const trackLink = document.createElement('a');
@@ -62,10 +81,10 @@
                 });
 
             } catch (error) {
-                console.error("There was an issue fetching the top tracks. DM me it's probably an API issue again -K", error);
+                console.error("There was an issue fetching the top tracks. DM me; it's probably an API issue again. -K", error);
             }
         }
-//add to the history on the left
+
         function addToHistory(artist) {
             const historyDiv = document.getElementById('searchHistory');
             const artistLink = document.createElement('a');
@@ -85,7 +104,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-black">
         <a class="navbar-brand" href="#">Team 2's Project: Spotifiers</a>
         <form class="form-inline my-2 my-lg-0 ml-auto" onsubmit="handleSearch(event)">
             <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
@@ -103,14 +122,40 @@
             <div class="col-md-9">
                 <h2 id="artistName"></h2>
                 <img id="artistImage" src="" alt="Artist Image" class="img-thumbnail mb-3">
-                <p id="artistFollowers"></p>
-                <p id="artistGenres"></p>
-                <p id="artistPopularity"></p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Artist</th>
+                            <th>Numbers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Followers:</td>
+                            <td id="artistFollowersTableCell"></td>
+                        </tr>
+                        <tr>
+                            <td>Genres:</td>
+                            <td id="artistGenresTableCell"></td>
+                        </tr>
+                        <tr>
+                            <td>Popularity:</td>
+                            <td id="artistPopularityTableCell"></td>
+                        </tr>
+                    </tbody>
+                </table>
                 <a id="artistSpotifyLink" href="" target="_blank">Open on Spotify</a>
                 <h5 class="mt-4">Top 3 Tracks:</h5>
                 <ul id="topTracks" class="list-unstyled"></ul>
             </div>
         </div>
+    </div>
+
+    <!-- Dark Mode / Light Mode Toggle Button -->
+    <div class="text-center mt-3">
+        <button onclick="toggleDarkMode()" class="btn btn-primary">
+            Toggle Dark Mode / Light Mode
+        </button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
