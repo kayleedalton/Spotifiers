@@ -35,7 +35,7 @@
 
         async function fetchArtistData() {
             const artistName = document.getElementById('artistSearch').value;
-            const apiUrl = `http:127.0.0.1:8000/?artist_name=${encodeURIComponent(artistName)}`;
+            const apiUrl = `https://spotifiers-f9b575e2cffb.herokuapp.com/?artist_name=${encodeURIComponent(artistName)}`;
 
             try {
                 let response = await fetch(apiUrl);
@@ -60,7 +60,7 @@
         }
 
         async function fetchTopTracks(artistName) {
-            const apiUrl = `http://127.0.0.1:8000/top-tracks?artist_name=${encodeURIComponent(artistName)}`;
+            const apiUrl = `https://spotifiers-f9b575e2cffb.herokuapp.com/top-tracks?artist_name=${encodeURIComponent(artistName)}`;
 
             try {
                 let response = await fetch(apiUrl);
