@@ -77,8 +77,8 @@ app.add_middleware(
 
 @app.get("/")
 def read_root(artist_name: str = Query(..., description="Name of the artist to search for")):
-    CLIENT_ID = "a5b771d489954d1081a424d5c348a08b"
-    CLIENT_SECRET = "88cffd9d943f4700b4362b149455fa0c"
+    CLIENT_ID = ""
+    CLIENT_SECRET = ""
 
     access_token = get_access_token(CLIENT_ID, CLIENT_SECRET)
     artist_data = get_artist_data(access_token, artist_name)
