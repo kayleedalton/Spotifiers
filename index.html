@@ -117,10 +117,14 @@
             historyDiv.appendChild(listItem);
         }
 
-        function handleSearch(event) {
-            event.preventDefault();
-            fetchArtistData();
-        }
+function handleSearch(event) {
+    event.preventDefault();
+    fetchArtistData();
+
+    // Make the artist image placeholder visible after initiating the search
+    const artistImagePlaceholder = document.getElementById('artistImagePlaceholder');
+    artistImagePlaceholder.style.display = 'block'; // Change display property to make it visible
+}
     </script>
 </head>
 
