@@ -69,9 +69,6 @@
                 document.getElementById('artistSpotifyLink').href = artist.external_urls.spotify;
                 document.getElementById('artistImage').src = artist.images[0].url;
 
-                // Show the artist image after fetching data
-                const artistImagePlaceholder = document.getElementById('artistImagePlaceholder');
-                artistImagePlaceholder.style.display = 'block';
 
                 addToHistory(artist);
 
