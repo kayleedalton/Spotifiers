@@ -19,28 +19,14 @@
             color: #000;
         }
 
-        /* Logo styles */
-        .navbar-brand img {
-            width: 200px;
-            height: auto;
-            margin-right: 15px;
-        }
-
-        /* Hide the artist image placeholder by default */
-        #artistImagePlaceholder {
-            display: none;
-        }
-
-        /* Style for Spotify iframe */
         .spotify-iframe {
             border: none;
             width: 100%;
             height: 400px; /* Adjust the height as needed */
-            overflow-y: scroll; /* Enables scrolling */
         }
     </style>
     <script>
-        let isDarkMode = true; // I have dark mode as the default
+        let isDarkMode = true; // Default to dark mode
 
         function toggleDarkMode() {
             const body = document.body;
@@ -69,14 +55,12 @@
                 document.getElementById('artistSpotifyLink').href = artist.external_urls.spotify;
                 document.getElementById('artistImage').src = artist.images[0].url;
 
-
                 addToHistory(artist);
 
-                // Fetch the top 3 tracks
                 fetchTopTracks(artistName);
 
             } catch (error) {
-                console.error("There was an issue fetching the artist data. DM me to start the API again; it's probably just offline. -K", error);
+                console.error("There was an issue fetching the artist data.", error);
             }
         }
 
@@ -102,7 +86,7 @@
                 });
 
             } catch (error) {
-                console.error("There was an issue fetching the top tracks. DM me; it's probably an API issue again. -K", error);
+                console.error("There was an issue fetching the top tracks.", error);
             }
         }
 
@@ -117,29 +101,23 @@
             historyDiv.appendChild(listItem);
         }
 
-function handleSearch(event) {
-    event.preventDefault();
-    fetchArtistData();
-
-    // Make the artist image placeholder visible after initiating the search
-    const artistImagePlaceholder = document.getElementById('artistImagePlaceholder');
-    artistImagePlaceholder.style.display = 'block'; // Change display property to make it visible
-}
+        function handleSearch(event) {
+            event.preventDefault();
+            fetchArtistData();
+        }
     </script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-black">
+    <nav class="navbar navbar-expand-lg navbar-light bg-black">
         <a class="navbar-brand" href="#">
-            <img src="https://i.imgur.com/IvKX4kw.png" alt="Your Logo" class="logo">
+            <img src="https://i.imgur.com/IvKX4kw.png" alt="Team 2's Logo" style="height: 200px;"> <!-- Logo Image -->
             Team 2's Project: Spotifiers
         </a>
-        <div class="ml-auto">
-            <form class="form-inline" onsubmit="handleSearch(event)">
-                <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
+        <form class="form-inline my-2 my-lg-0 ml-auto" onsubmit="handleSearch(event)">
+            <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </nav>
 
     <div class="container mt-5">
@@ -151,11 +129,8 @@ function handleSearch(event) {
             </div>
             <div class="col-md-9">
                 <h2 id="artistName"></h2>
-                <!-- Placeholder for artist image -->
-                <div id="artistImagePlaceholder" class="img-thumbnail mb-3">
-                    <!-- Placeholder content goes here -->
-                </div>
-                <table id="dataTable">
+                <img id="artistImage" src="" alt="Artist Image" class="img-thumbnail mb-3">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Artist</th>
@@ -177,19 +152,6 @@ function handleSearch(event) {
                         </tr>
                     </tbody>
                 </table>
-                <style>
-                    #dataTable {
-                        width: 100%;
-                        border-collapse: collapse;
-                    }
-
-                    #dataTable th,
-                    #dataTable td {
-                        border: 1px solid #aaa;
-                        padding: 9px;
-                        text-align: left;
-                    }
-                </style>
                 <a id="artistSpotifyLink" href="" target="_blank">Open on Spotify</a>
                 <h5 class="mt-4">Top 3 Tracks:</h5>
                 <ul id="topTracks" class="list-unstyled"></ul>
