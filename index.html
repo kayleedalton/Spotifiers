@@ -8,55 +8,37 @@
     <title>Team 2's Project</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    body {
-        background-color: #000;
-        color: #ddd;
-    }
+        body {
+            background-color: #000;
+            color: #ddd;
+        }
 
-    .navbar-dark-mode {
-        background-color: #333; /* Dark gray for dark mode */
-    }
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #fff;
+            color: #000;
+        }
 
-    .table-dark-mode {
-        background-color: #333; /* Dark gray for dark mode */
-    }
-
-    body.light-mode {
-        background-color: #fff;
-        color: #000;
-    }
-
-    .navbar-light-mode {
-        background-color: #f8f9fa; /* Light gray for light mode */
-    }
-
-    .table-light-mode {
-        background-color: #f8f9fa; /* Light gray for light mode */
-    }
-
-    .spotify-iframe {
-        border: none;
-        width: 100%;
-        height: 400px;
-    }
-</style>
+        .spotify-iframe {
+            border: none;
+            width: 100%;
+            height: 400px;
+        }
+    </style>
 
     <script>
-        let isDarkMode = true;
+    let isDarkMode = true; // Dark mode as default
 
-function toggleDarkMode() {
-    const body = document.body;
-    const navbar = document.querySelector('.navbar');
-    const table = document.querySelector('.table');
+    function toggleDarkMode() {
+        const body = document.body;
+        const table = document.querySelector('.table');
 
-    isDarkMode = !isDarkMode;
+        isDarkMode = !isDarkMode;
 
-    body.classList.toggle('light-mode', !isDarkMode);
-    navbar.classList.toggle('navbar-light-mode', !isDarkMode);
-    navbar.classList.toggle('navbar-dark-mode', isDarkMode);
-    table.classList.toggle('table-light-mode', !isDarkMode);
-    table.classList.toggle('table-dark-mode', isDarkMode);
-}
+        body.classList.toggle('light-mode', !isDarkMode);
+        table.classList.toggle('table-dark', isDarkMode);
+        table.classList.toggle('table-light', !isDarkMode);
+    }
 
         function clearHistory() {
             const historyDiv = document.getElementById('searchHistory');
@@ -139,11 +121,11 @@ function toggleDarkMode() {
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark-mode">
-    <a class="navbar-brand" href="#">
-        <img src="https://i.imgur.com/IvKX4kw.png" alt="Team 2's Logo" style="height: 200px;">
-        //Team 2's Project: Spotifiers
-    </a>
+    <nav class="navbar navbar-expand-lg navbar-dark-mode">
+        <a class="navbar-brand" href="#">
+            <img src="https://i.imgur.com/IvKX4kw.png" alt="Team 2's Logo" style="height: 200px;">
+            <!-- Team 2's Project: Spotifiers -->
+        </a>
         <form class="form-inline my-2 my-lg-0 ml-auto" onsubmit="handleSearch(event)">
             <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -160,7 +142,7 @@ function toggleDarkMode() {
             <div class="col-md-9">
                 <h2 id="artistName"></h2>
                 <img id="artistImage" src="" alt="Artist Image" class="img-thumbnail mb-3" style="display: none;">
-                <table class="table table-dark-mode">
+                <table class="table table-dark">
                     <thead>
                         <tr>
                             <th>Artist</th>
@@ -199,7 +181,9 @@ function toggleDarkMode() {
         <div class="row">
             <div class="col-md-9 offset-md-3">
                 <h2>TOP SONGS RIGHT NOW</h2>
-                <iframe class="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZEVXbMDoHDwVN2tF?si=33fc11dc0b70497f" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <iframe class="spotify-iframe"
+                    src="https://open.spotify.com/embed/playlist/37i9dQZEVXbMDoHDwVN2tF?si=33fc11dc0b70497f"
+                    frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
         </div>
     </div>
