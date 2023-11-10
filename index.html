@@ -18,12 +18,7 @@
             background-color: #fff;
             color: #000;
         }
-
-        .spotify-iframe {
-            border: none;
-            width: 100%;
-            height: 400px; /* Adjust the height as needed */
-        }
+         
     </style>
     <script>
         let isDarkMode = true; // I have dark mode as default
@@ -54,7 +49,7 @@
                 document.getElementById('artistPopularityTableCell').innerText = artist.popularity;
                 document.getElementById('artistSpotifyLink').href = artist.external_urls.spotify;
                 document.getElementById('artistImage').src = artist.images[0].url;
-
+document.getElementById('dataTable');
                 addToHistory(artist);
 
                 // Fetch the top 3 tracks
@@ -110,8 +105,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-black">
-        <a class="navbar-brand" href="#">Team 2's Project: Spotifiers</a>
+    <nav class="navbar navbar-expand-lg navbar-black">
+        <a style="font-size: 20px;">Team 2's Project: Spotifiers</a>
         <form class="form-inline my-2 my-lg-0 ml-auto" onsubmit="handleSearch(event)">
             <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -128,7 +123,7 @@
             <div class="col-md-9">
                 <h2 id="artistName"></h2>
                 <img id="artistImage" src="" alt="Artist Image" class="img-thumbnail mb-3">
-                <table class="table">
+                <table id="dataTable">
                     <thead>
                         <tr>
                             <th>Artist</th>
@@ -150,6 +145,17 @@
                         </tr>
                     </tbody>
                 </table>
+                <style>
+                #dataTable{
+                  width: 100%;
+                  border-collapse: collapse;
+                }
+                #dataTable th, #dataTable td{
+                  border:1px solid #aaa;
+                  padding: 9px;
+                  text-align: left;
+                }
+                </style>
                 <a id="artistSpotifyLink" href="" target="_blank">Open on Spotify</a>
                 <h5 class="mt-4">Top 3 Tracks:</h5>
                 <ul id="topTracks" class="list-unstyled"></ul>
@@ -162,16 +168,7 @@
         <button onclick="toggleDarkMode()" class="btn btn-primary">
             Toggle Dark Mode / Light Mode
         </button>
-    </div>
-
-    <!-- Spotify Playlist Iframe -->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-9 offset-md-3">
-                <h2>TOP SONGS RIGHT NOW</h2>
-                <iframe class="spotify-iframe" src="https://open.spotify.com/embed/playlist/37i9dQZEVXbMDoHDwVN2tF?si=33fc11dc0b70497f" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </div>
-        </div>
+       
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
