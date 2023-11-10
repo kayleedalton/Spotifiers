@@ -18,10 +18,21 @@
             background-color: #fff;
             color: #000;
         }
-         
+
+        /* Logo styles */
+        .navbar-brand img {
+            width: 200px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        /* Hide the artist image placeholder by default */
+        #artistImagePlaceholder {
+            display: none;
+        }
     </style>
     <script>
-        let isDarkMode = true; // I have dark mode as default
+        let isDarkMode = true; // I have dark mode as the default
 
         function toggleDarkMode() {
             const body = document.body;
@@ -49,7 +60,11 @@
                 document.getElementById('artistPopularityTableCell').innerText = artist.popularity;
                 document.getElementById('artistSpotifyLink').href = artist.external_urls.spotify;
                 document.getElementById('artistImage').src = artist.images[0].url;
-document.getElementById('dataTable');
+
+                // Show the artist image after fetching data
+                const artistImagePlaceholder = document.getElementById('artistImagePlaceholder');
+                artistImagePlaceholder.style.display = 'block';
+
                 addToHistory(artist);
 
                 // Fetch the top 3 tracks
@@ -106,11 +121,16 @@ document.getElementById('dataTable');
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-black">
-        <a style="font-size: 20px;">Team 2's Project: Spotifiers</a>
-        <form class="form-inline my-2 my-lg-0 ml-auto" onsubmit="handleSearch(event)">
-            <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <a class="navbar-brand" href="#">
+            <img src="https://i.imgur.com/IvKX4kw.png" alt="Your Logo" class="logo">
+            Team 2's Project: Spotifiers
+        </a>
+        <div class="ml-auto">
+            <form class="form-inline" onsubmit="handleSearch(event)">
+                <input class="form-control mr-sm-2" type="search" id="artistSearch" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
     </nav>
 
     <div class="container mt-5">
@@ -122,7 +142,10 @@ document.getElementById('dataTable');
             </div>
             <div class="col-md-9">
                 <h2 id="artistName"></h2>
-                <img id="artistImage" src="" alt="Artist Image" class="img-thumbnail mb-3">
+                <!-- Placeholder for artist image -->
+                <div id="artistImagePlaceholder" class="img-thumbnail mb-3">
+                    <!-- Placeholder content goes here -->
+                </div>
                 <table id="dataTable">
                     <thead>
                         <tr>
@@ -146,15 +169,17 @@ document.getElementById('dataTable');
                     </tbody>
                 </table>
                 <style>
-                #dataTable{
-                  width: 100%;
-                  border-collapse: collapse;
-                }
-                #dataTable th, #dataTable td{
-                  border:1px solid #aaa;
-                  padding: 9px;
-                  text-align: left;
-                }
+                    #dataTable {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+
+                    #dataTable th,
+                    #dataTable td {
+                        border: 1px solid #aaa;
+                        padding: 9px;
+                        text-align: left;
+                    }
                 </style>
                 <a id="artistSpotifyLink" href="" target="_blank">Open on Spotify</a>
                 <h5 class="mt-4">Top 3 Tracks:</h5>
@@ -168,7 +193,7 @@ document.getElementById('dataTable');
         <button onclick="toggleDarkMode()" class="btn btn-primary">
             Toggle Dark Mode / Light Mode
         </button>
-       
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
