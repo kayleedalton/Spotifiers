@@ -1,5 +1,5 @@
 "devDependencies": {
-  "jest": "^26.0.0"  // Use the latest version of Jest
+  "jest": "^26.0.0"
 }
 "scripts": {
   "test": "jest"
