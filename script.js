@@ -88,3 +88,4 @@ function handleSearch(event) {
     event.preventDefault();
     fetchArtistData();
 }
+export { toggleDarkMode };
